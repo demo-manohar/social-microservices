@@ -37,5 +37,6 @@ router.post(
   },
   uploadMedia,
 );
+
 router.get("/",authenticateRequest, getAllMedia);
 module.exports = router;
