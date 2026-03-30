@@ -31,6 +31,7 @@ mediaSchema.index({ userId: 1 }, { unique: true }) // This index will ensure tha
 mediaSchema.index({ publicId: 1 }, { unique: true }) // This index will ensure that each public id is unique
 mediaSchema.index({ originalName: 1 }, { unique: true }) // This index will ensure that each original name is unique
 mediaSchema.index({ mimeType: 1 }, { unique: true }) // This index will ensure that each mime type is unique
+mediaSchema.index({ url: 1 }, { unique: true }) // This index will ensure that each url is unique
 const Media=mongoose.model('Media',mediaSchema);
 module.exports=Media;
 
