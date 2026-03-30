@@ -1,8 +1,6 @@
 # docker-compose.yml file is used to define and run multi-container Docker applications.
 
 # version: 3.8 is the version of the docker-compose file
-version: "3.8"
-
 # services: is a list of services to run
 # build the api-gateway image from the Dockerfile in the api-gateway directory
 # map the port 3000 of the container to the port 3000 of the host
@@ -28,9 +26,11 @@ services:
       - "3001:3001"
     env_file: ./identity-service/.env
     depends_on:
+      - mongodb
       - redis
       - rabbitmq
     environment:
+      - MONGODB_URL=mongodb://mongodb:27017/identity-service
       - REDIS_URL=redis://redis:6379
       - RABBITMQ_URL=amqp://rabbitmq:5672
 
@@ -41,9 +41,11 @@ services:
       - "3002:3002"
     env_file: ./post-service/.env
     depends_on:
+      - mongodb
       - redis
       - rabbitmq
     environment:
+      - MONGODB_URI=mongodb://mongodb:27017/post-service
       - REDIS_URL=redis://redis:6379
       - RABBITMQ_URL=amqp://rabbitmq:5672
 
@@ -54,9 +56,11 @@ services:
       - "3004:3004"
     env_file: ./media-service/.env
     depends_on:
+      - mongodb
       - redis
       - rabbitmq
     environment:
+      - MONGODB_URI=mongodb://mongodb:27017/media-service
       - REDIS_URL=redis://redis:6379
       - RABBITMQ_URL=amqp://rabbitmq:5672
 
@@ -67,9 +71,11 @@ services:
       - "3005:3005"
     env_file: ./search-service/.env
     depends_on:
+      - mongodb
       - redis
       - rabbitmq
     environment:
+      - MONGODB_URI=mongodb://mongodb:27017/search-service
       - REDIS_URL=redis://redis:6379
       - RABBITMQ_URL=amqp://rabbitmq:5672
 
@@ -82,3 +88,8 @@ services:
     image: rabbitmq:3-management
     ports:
       - "5672:5672"
+
+  mongodb:
+    image: mongo:7
+    ports:
+      - "27017:27017"
