@@ -27,7 +27,7 @@ const mediaSchema=new mongoose.Schema({
     timestamps: true
 }
 )
-
+mediaSchema.index({ userId: 1 }, { unique: true }) // This index will ensure that each user has only one media
 const Media=mongoose.model('Media',mediaSchema);
 module.exports=Media;
 
