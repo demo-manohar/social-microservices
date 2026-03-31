@@ -28,6 +28,8 @@ const mediaSchema=new mongoose.Schema({
 }
 )
 mediaSchema.index({ userId: 1 }, { unique: true }) // This index will ensure that each user has only one media
+mediaSchema.index({ publicId: 1 }, { unique: true }) // This index will ensure that each publicId is unique
+mediaSchema.index({ userId: 1, publicId: 1 }, { unique: true }) // This index will ensure that each user has only one media with the same publicId
 const Media=mongoose.model('Media',mediaSchema);
 module.exports=Media;
 
