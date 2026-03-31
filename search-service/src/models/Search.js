@@ -24,6 +24,7 @@ content:{
 
 searchSchema.index({content:'text'});// Indexing content for text search
 searchSchema.index({createdAt:-1});// Indexing createdAt for faster queries based on creation date, -1 is for descending order
+searchSchema.index({userId:-1});
 const Search=mongoose.model('Search',searchSchema);
 
 module.exports=Search;
